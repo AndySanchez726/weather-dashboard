@@ -1,3 +1,6 @@
+// One Call API test js
+
+
 // fetch city data
 // list city data 
 var body = document.querySelector("body")
@@ -18,33 +21,24 @@ var currentConditions = function (cityEntered) {
         return response.json()
         .then((data) => {
 
-
         var testItemsContainer = document.createElement("ul")
         var testItems = document.createElement("li")
-
         var cityName = data.name
-        var cityTemp = data.main.temp
-        var cityDate = data.dt
-        var date = moment.unix(cityDate).format("MM/DD/YYYY hh mm ss")
-        var cityHumidity = data.main.humidity
-        var cityWindSpeed = data.wind.speed
-        var cityIcon = data.weather[0].icon
-        var iconUrl = ("http://openweathermap.org/img/wn/" + cityIcon + "@2x.png")
-
         var cityLon = data.coord.lon
         var cityLat = data.coord.lat
+        console.log(cityName)
         // fetch city uv index using cityLon and cityLat
-        fetch("http://api.openweathermap.org/data/2.5/uvi?appid=7c1bb6d4995897e4344ff7f98ec3a222&lat=" + cityLat + "&lon=" + cityLon)
+        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&units=imperial&appid=7c1bb6d4995897e4344ff7f98ec3a222")
             .then((locationResponse) => {
                 return locationResponse.json()
                 .then((locationData) => {
-                    var cityUVIndex = locationData.value
-                    console.log(cityUVIndex)
+                    var cityTemp = locationData.current.temp
+                    console.log(cityTemp)
                 })
             })
 
         var iconImage = document.createElement("img")
-        iconImage.setAttribute("src", iconUrl)
+        // iconImage.setAttribute("src", )
         testItems.appendChild(iconImage)
         testItemsContainer.appendChild(testItems)
         testWeatherEl.appendChild(testItemsContainer)
