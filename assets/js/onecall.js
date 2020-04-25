@@ -17,10 +17,6 @@ var cityIconEl = document.querySelector("#current-icon")
 
 // forecast elements
 var forecastContainerEl = document.querySelector("#forecast-container")
-// var forecastDateEl = document.querySelector("#forecast-date")
-// var forecastTempEl = document.querySelector("#forecast-temp")
-// var forecastHumidityEl = document.querySelector("#forecast-humidity")
-// var forecastIconEl = document.querySelector("#forecast-icon")
 
 // function to get avverage of min and max temperature for forecast
 var averageTemp = function (average) {
@@ -28,10 +24,18 @@ var averageTemp = function (average) {
      return sum.toFixed([0])
 }
 
+var removeForecast = function () {
+    var child = forecastContainerEl.lastElementChild;
+    while (child) {
+        forecastContainerEl.removeChild(child);
+        child = forecastContainerEl.lastElementChild;
+    }
+}
+
 var formSubmitHandler = function (event) {
     event.preventDefault();
     var city = cityInput.value
-    forecastContainerEl.remove()
+    removeForecast();
     currentConditions(city);
     dailyForecast(city);
 }
@@ -79,7 +83,7 @@ var dailyForecast = function (cityEntered) {
         var cityLon = data.coord.lon
         var cityLat = data.coord.lat
         // fetch city uv index using cityLon and cityLat
-        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + "30.27" + "&lon=" + "-97.74" + "&units=imperial&appid=7c1bb6d4995897e4344ff7f98ec3a222")
+        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&units=imperial&appid=7c1bb6d4995897e4344ff7f98ec3a222")
             .then((locationResponse) => {
                 return locationResponse.json()
                 .then((locationData) => {
