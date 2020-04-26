@@ -49,6 +49,17 @@ var formSubmitHandler = function () {
     // loadCity();
 }
 
+// clear recent search (local storage)
+$("#clear-history").on("click", function() {
+    localStorage.clear();
+    var child = savedCityContainerEl.lastElementChild;
+    while (child) {
+        savedCityContainerEl.removeChild(child);
+        child = savedCityContainerEl.lastElementChild
+    }
+}) 
+
+
 var saveCity = function (cityEntered) {
     cityArray.push(cityEntered)
     var savedCity = document.createElement("p")
