@@ -20,6 +20,9 @@ var forecastContainerEl = document.querySelector("#forecast-container")
 
 // saved city array
 var cityArray = [];
+console.log(cityArray)
+var savedCityContainerEl = document.querySelector("#saved-container")
+
 // function to get avverage of min and max temperature for forecast
 var averageTemp = function (average) {
      var sum = average.reduce( (a,b) => a + b)/average.length
@@ -43,10 +46,28 @@ var formSubmitHandler = function (event) {
     cityArray.push(city)
     console.log(cityArray)
     saveCity(city);
+    // loadCity();
 }
 
 var saveCity = function (cityEntered) {
     localStorage.setItem("city", JSON.stringify(cityArray))
+    cityArray.push(cityEntered)
+    var savedCity = document.createElement("p")
+    savedCity.setAttribute("id", cityEntered)
+    savedCity.textContent = cityEntered
+    savedCityContainerEl.appendChild(savedCity)
+}
+
+var loadCity = function () {
+    var cityStorage = JSON.parse(localStorage.getItem("city"))
+    console.log(cityStorage)
+    for (var i = 0; i < cityStorage.length; i++) {
+        var savedCity = document.createElement("p")
+        savedCity.setAttribute("id", cityStorage[i])
+        savedCity.textContent = cityStorage[i]
+        savedCityContainerEl.appendChild(savedCity)
+        cityArray.push(cityStorage[i])
+    }
 }
 
 var currentConditions = function (cityEntered) {
@@ -128,5 +149,5 @@ var dailyForecast = function (cityEntered) {
 
 
 
-
+loadCity();
 cityForm.addEventListener("submit", formSubmitHandler)
