@@ -18,6 +18,8 @@ var cityIconEl = document.querySelector("#current-icon")
 // forecast elements
 var forecastContainerEl = document.querySelector("#forecast-container")
 
+// saved city array
+var cityArray = [];
 // function to get avverage of min and max temperature for forecast
 var averageTemp = function (average) {
      var sum = average.reduce( (a,b) => a + b)/average.length
@@ -38,6 +40,13 @@ var formSubmitHandler = function (event) {
     removeForecast();
     currentConditions(city);
     dailyForecast(city);
+    cityArray.push(city)
+    console.log(cityArray)
+    saveCity(city);
+}
+
+var saveCity = function (cityEntered) {
+    localStorage.setItem("city", JSON.stringify(cityArray))
 }
 
 var currentConditions = function (cityEntered) {
