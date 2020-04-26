@@ -53,4 +53,5 @@ var currentConditions = function (cityEntered) {
 
 };
 
+
 cityForm.addEventListener("submit", formSubmitHandler)
