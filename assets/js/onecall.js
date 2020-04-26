@@ -37,36 +37,44 @@ var removeForecast = function () {
     }
 }
 
-var formSubmitHandler = function (event) {
+var formSubmitHandler = function () {
     event.preventDefault();
     var city = cityInput.value
     removeForecast();
     currentConditions(city);
     dailyForecast(city);
-    cityArray.push(city)
+    // cityArray.push(city)
     console.log(cityArray)
     saveCity(city);
     // loadCity();
 }
 
 var saveCity = function (cityEntered) {
-    localStorage.setItem("city", JSON.stringify(cityArray))
     cityArray.push(cityEntered)
     var savedCity = document.createElement("p")
     savedCity.setAttribute("id", cityEntered)
     savedCity.textContent = cityEntered
     savedCityContainerEl.appendChild(savedCity)
+    console.log(cityArray)
+    localStorage.setItem("city", JSON.stringify(cityArray))
+
 }
 
 var loadCity = function () {
-    var cityStorage = JSON.parse(localStorage.getItem("city"))
-    console.log(cityStorage)
-    for (var i = 0; i < cityStorage.length; i++) {
-        var savedCity = document.createElement("p")
-        savedCity.setAttribute("id", cityStorage[i])
-        savedCity.textContent = cityStorage[i]
-        savedCityContainerEl.appendChild(savedCity)
-        cityArray.push(cityStorage[i])
+    var cityArray = JSON.parse(localStorage.getItem("city"))
+    if (!cityArray) {
+        cityArray = []
+        console.log("if")
+    } 
+    else {
+        console.log("else")
+        for (var i = 0; i < cityArray.length; i++) {
+            var savedCity = document.createElement("p")
+            savedCity.setAttribute("id", cityArray[i])
+            savedCity.textContent = cityArray[i]
+            savedCityContainerEl.appendChild(savedCity)
+            // cityArray.push(cityStorage[i])
+        }
     }
 }
 
@@ -147,6 +155,16 @@ var dailyForecast = function (cityEntered) {
 
 }
 
+
+// click on saved city name load city weather
+$("#saved-container").on("click", "p", function () {
+    var text = $(this)
+        .text()
+        .trim();
+    console.log(text)
+    cityInput.value = text
+    formSubmitHandler();
+})
 
 
 loadCity();
