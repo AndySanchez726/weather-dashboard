@@ -8,7 +8,14 @@ var cityInput = document.querySelector("#city-input")
 var formSubmitHandler = function (event) {
     event.preventDefault();
     var city = cityInput.value
-    currentConditions(city)
+    debugger;
+    saveCity(city);
+    currentConditions(city);
+}
+
+var saveCity = function (cityEntered) {
+    console.log(cityEntered)
+    localStorage.setItem("city", cityEntered)
 }
 
 var currentConditions = function (cityEntered) {
