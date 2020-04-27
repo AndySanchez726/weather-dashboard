@@ -91,7 +91,7 @@ var loadCity = function () {
 
 var currentConditions = function (cityEntered) {
     // fetch info for entered city
-    fetch("http://api.openweathermap.org/data/2.5/weather?q=" + cityEntered + "&units=imperial&appid=7c1bb6d4995897e4344ff7f98ec3a222")
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityEntered + "&units=imperial&appid=7c1bb6d4995897e4344ff7f98ec3a222")
     .then((response) => {
         return response.json()
         .then((data) => {
@@ -125,7 +125,7 @@ var currentConditions = function (cityEntered) {
                         cityUVEl.className = "extremely-high rounded"
                     }
                     
-                    cityIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + locationData.current.weather[0].icon + "@2x.png")
+                    cityIconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + locationData.current.weather[0].icon + "@2x.png")
 
                 })
             })
@@ -139,7 +139,7 @@ var dailyForecast = function (cityEntered) {
     var forecastEl = document.createElement("div")
     forecastEl.className = "row"
     forecastContainerEl.appendChild(forecastEl)
-    fetch("http://api.openweathermap.org/data/2.5/weather?q=" + cityEntered + "&units=imperial&appid=7c1bb6d4995897e4344ff7f98ec3a222")
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityEntered + "&units=imperial&appid=7c1bb6d4995897e4344ff7f98ec3a222")
     .then((response) => {
         return response.json()
         .then((data) => {
@@ -165,7 +165,7 @@ var dailyForecast = function (cityEntered) {
                         var forecastHumidityEl = document.createElement("p")
                         forecastHumidityEl.textContent = "Humidity: " + forecast[i].humidity + "%"
                         var forecastIconEl = document.createElement("img")
-                        forecastIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + forecast[i].weather[0].icon + "@2x.png")
+                        forecastIconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + forecast[i].weather[0].icon + "@2x.png")
 
                         // append elements to div
                         day.appendChild(forecastDateEl)
