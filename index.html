@@ -3,43 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
     <title>Weather Dashboard</title>
 </head>
-<body>
-    <!-- Enter City -->
-    <div id="cityInput">
-        <form id="city-form">
-            <label for="city-input">City</label>
-            <input type="text" id="city-input" name="city-name">
-            <button type="submit">Find City</button>
-        </form>
-    </div>
-    <!-- Saved Cities -->
-    <div id="saved-container">
-
-    </div>
-    <button id="clear-history">Clear Histroy</button>
-    <!-- Current Weather -->
-    <div id="test-weather">
-        <h3 id="name-date"></h3>
-        <p id="current-temp"></p>
-        <p id="current-humidity"></p>
-        <P id="current-wind"></P>
-        <p id="current-uv"></p>
-        <img src="" alt="" id="current-icon">
-    </div>
-    <!-- Forecast -->
-    <div id="forecast-container">
-        <div id="forecast">
-            <h4 id="forecast-date"></h4>
-            <p id="forecast-temp"></p>
-            <p id="forecast-humidity"></p>
-            <img src="" alt="" id="forecast-icon">
+<body class="container">
+    <header class="bg-dark">
+        <h1 class="text-white text-center">Weather Dashboard</h1>
+    </header>
+    <div class="row">
+        <!-- Cities -->
+        <div class="col-3">
+            <!-- Enter City -->
+            <div class="bg-info border border-dark" id="city-section">
+                <div class="" id="cityInput">
+                    <form id="city-form">
+                        <label for="city-input">Search For A City</label>
+                        <input type="text" id="city-input" name="city-name">
+                        <button class="btn btn-primary" type="submit"><span class="oi oi-magnifying-glass"></span></button>
+                    </form>
+                </div>
+                <!-- Saved Cities -->
+                
+                    <div id="saved-container"></div>
+                    <button id="clear-history">Clear History</button>
+            </div>
+        </div>
+        <!-- All Weather Container -->
+        <div class="col-9">
+            <!-- Current Weather -->
+            <div class="col-12" id="test-weather">
+                <h3 id="name-date"></h3>
+                <p id="current-temp"></p>
+                <p id="current-humidity"></p>
+                <P id="current-wind"></P>
+                <span class="rounded" id="current-uv"></span>
+                <img src="" alt="" id="current-icon">
+            </div>
+            <!-- Forecast -->
+            <div class="col-12" id="forecast-container">
+                <div id="forecast">
+                    <h4 id="forecast-date"></h4>
+                    <p id="forecast-temp"></p>
+                    <p id="forecast-humidity"></p>
+                    <img src="" alt="" id="forecast-icon">
+                </div>
+            </div>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="./assets/js/onecall.js"></script>
 </body>
 </html>

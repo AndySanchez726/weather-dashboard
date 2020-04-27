@@ -105,13 +105,26 @@ var currentConditions = function (cityEntered) {
                 return locationResponse.json()
                 .then((locationData) => {
                     // current day
-                    var cityDate = moment.unix(locationData.current.dt).format("MM/DD/YYYY hh mm ss")
+                    var cityDate = moment.unix(locationData.current.dt).format("MM/DD/YYYY")
                     console.log(cityDate)
                     cityNameDateEl.textContent = cityName + " " + cityDate
                     cityTempEl.textContent = "Temperature: " + locationData.current.temp + "°F"
                     cityHumidityEl.textContent = "Humidity: " + locationData.current.humidity + "%"
                     cityWindEl.textContent = "Wind Speed: " + locationData.current.wind_speed + " MPH"
-                    cityUVEl.textContent = "UV Index: " + locationData.current.uvi
+                    var uvIndex = locationData.current.uvi
+                    cityUVEl.textContent = "UV Index: " + uvIndex
+                    if (uvIndex >= 0.00 && uvIndex <= 2.99) {
+                        cityUVEl.classList.add ("low")
+                    } else if (uvIndex >= 3.00 && uvIndex <= 5.99) {
+                        cityUVEl.classList.add ("medium")
+                    } else if (uvIndex >= 6.00 && uvIndex <= 7.99) {
+                        cityUVEl.classList.add ("hig)")
+                    } else if (uvIndex >= 8.00 && uvIndex <= 10.99) {
+                        cityUVEl.classList.add ("very-high")
+                    } else if (uvIndex >= 11.00) {
+                        cityUVEl.classList.add ("extremely-high")
+                    }
+                    
                     cityIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + locationData.current.weather[0].icon + "@2x.png")
 
                 })
@@ -123,6 +136,9 @@ var currentConditions = function (cityEntered) {
 };
 
 var dailyForecast = function (cityEntered) {
+    var forecastEl = document.createElement("div")
+    forecastEl.className = "row"
+    forecastContainerEl.appendChild(forecastEl)
     fetch("http://api.openweathermap.org/data/2.5/weather?q=" + cityEntered + "&units=imperial&appid=7c1bb6d4995897e4344ff7f98ec3a222")
     .then((response) => {
         return response.json()
@@ -141,8 +157,9 @@ var dailyForecast = function (cityEntered) {
 
                         var day = document.createElement("div")
                         day.setAttribute("id", "day" + i)
+                        day.className = "card bg-primary"
                         var forecastDateEl = document.createElement("h4");
-                        forecastDateEl.textContent = moment.unix(forecast[i].dt).format("MM/DD/YYYY hh mm ss")
+                        forecastDateEl.textContent = moment.unix(forecast[i].dt).format("MM/DD/YYYY")
                         var forecastTempEl = document.createElement("p")
                         forecastTempEl.textContent = "Temperature: " + averageTemp([forecast[i].temp.min, forecast[i].temp.max]) + "°F"
                         var forecastHumidityEl = document.createElement("p")
@@ -155,7 +172,7 @@ var dailyForecast = function (cityEntered) {
                         day.appendChild(forecastTempEl)
                         day.appendChild(forecastHumidityEl)
                         day.appendChild(forecastIconEl)
-                        forecastContainerEl.appendChild(day)
+                        forecastEl.appendChild(day)
                     }
                 })
             })

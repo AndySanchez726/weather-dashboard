@@ -1,0 +1,27 @@
+
+.low {
+    background-color: green;
+}
+.medium {
+    background-color: yellow;
+}
+.high {
+    background-color: orange;
+}
+.very-high {
+    background-color: red;
+}
+.extremely-high {
+    background-color: plum;
+}
+#current-uv {
+    padding: 1%;
+}
+
+#forecast-container {
+    margin: 5px;
+}
+.card {
+    margin: 5px;
+    padding: 5px;
+}
