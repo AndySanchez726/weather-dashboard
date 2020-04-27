@@ -114,15 +114,15 @@ var currentConditions = function (cityEntered) {
                     var uvIndex = locationData.current.uvi
                     cityUVEl.textContent = "UV Index: " + uvIndex
                     if (uvIndex >= 0.00 && uvIndex <= 2.99) {
-                        cityUVEl.classList.add ("low")
+                        cityUVEl.className = "low rounded"
                     } else if (uvIndex >= 3.00 && uvIndex <= 5.99) {
-                        cityUVEl.classList.add ("medium")
+                        cityUVEl.className = "medium rounded"
                     } else if (uvIndex >= 6.00 && uvIndex <= 7.99) {
-                        cityUVEl.classList.add ("hig)")
+                        cityUVEl.className = "high rounded"
                     } else if (uvIndex >= 8.00 && uvIndex <= 10.99) {
-                        cityUVEl.classList.add ("very-high")
+                        cityUVEl.className = "very-high rounded"
                     } else if (uvIndex >= 11.00) {
-                        cityUVEl.classList.add ("extremely-high")
+                        cityUVEl.className = "extremely-high rounded"
                     }
                     
                     cityIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + locationData.current.weather[0].icon + "@2x.png")
